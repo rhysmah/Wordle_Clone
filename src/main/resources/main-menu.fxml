@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.Text?>
+
+<?import java.net.URL?>
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.wordle_clone.MainMenuController">
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Text id="main-menu-title"
+          text="Wordle Clone"
+          textAlignment="CENTER">
+    </Text>
+
+    <Button id="start-game-button"
+            onAction="#startGameButtonClick"
+            text="Start Game">
+    </Button>
+
+    <Button id="quit-game-button"
+            fx:id="quitGameButton"
+            onAction="#quitGameButtonClick"
+            text="Quit Game">
+    </Button>
+
+    <Text id="main-menu-footer"
+          text="Created by Rhys Mahannah, 2022."
+          textAlignment="CENTER">
+    </Text>
+
+    <stylesheets>
+        <URL value="@main-menu.css"/>
+    </stylesheets>
+</VBox>
