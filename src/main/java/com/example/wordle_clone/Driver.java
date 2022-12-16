@@ -23,12 +23,11 @@ public final class Driver {
 
             // Check that player enters a valid word.
             while (invalidUserGuess) {
-
                 System.out.print("\nEnter a five-letter word: ");
                 playerGuessWord = wordle.askPlayerForGuessWord();
 
                 if (!wordle.validLength(playerGuessWord) || !wordle.validCharacters(playerGuessWord)) {
-                    System.out.println("The word can only contain five letters.");
+                    System.out.println("The word must contain five letters.");
                     continue;
                 }
                 if (!wordle.validWord(playerGuessWord)) {
@@ -47,9 +46,11 @@ public final class Driver {
                     wordle.printLetterWithBackground(letter, Wordle.GREEN_BACKGROUND);
                     wordle.updateWinCondition(index);
                     wordle.removeLetterFromGuessWord(index);
+
                 } else if (wordle.letterInIncorrectPosition(letter, wordle.getGameWord())) {
                     wordle.printLetterWithBackground(letter, Wordle.YELLOW_BACKGROUND);
                     wordle.removeLetterFromGuessWord(wordle.getGameWord().indexOf(letter));
+
                 } else {
                      wordle.printLetterWithoutBackground(letter);
                      wordle.removeLetterFromGuessWord(index);
