@@ -19,9 +19,10 @@ public final class Driver {
 
         String playerGuessWord = "";
 
-        System.out.println("------------------\n" +
-                "** WORDLE CLONE **\n" +
-                "------------------");
+        System.out.println("""
+                ------------------
+                ** WORDLE CLONE **
+                ------------------""");
 
         // Game loop
         while (player.getPlayerTurn() < Player.MAX_NUMBER_PLAYER_TURNS) {
