@@ -19,10 +19,12 @@ public final class Driver {
 
         String playerGuessWord = "";
 
-        System.out.println("""
+        System.out.println(
+                """
                 ------------------
                 ** WORDLE CLONE **
-                ------------------""");
+                ------------------
+                """);
 
         // Game loop
         while (player.getPlayerTurn() < Player.MAX_NUMBER_PLAYER_TURNS) {
@@ -63,14 +65,13 @@ public final class Driver {
                      player.removeLetterFromGuessWord(index);
                  }
             }
-            player.incrementPlayerTurn();
-            System.out.println("\nYou have " + (Player.MAX_NUMBER_PLAYER_TURNS - player.getPlayerTurn()) + " turns remaining.");
-
             if (wordle.winConditionMet()) {
                 System.out.println("\nCongratulations! You won with "
                         + (Player.MAX_NUMBER_PLAYER_TURNS - player.getPlayerTurn()) + " turn(s) remaining.");
                 System.exit(0);
             }
+            player.incrementPlayerTurn();
+            System.out.println("\nYou have " + (Player.MAX_NUMBER_PLAYER_TURNS - player.getPlayerTurn()) + " turns remaining.");
         }
         System.out.println("You lost! The word was " + wordle.getGameWord());
     }
