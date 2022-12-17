@@ -3,7 +3,7 @@ package com.example.wordle_clone;
 /**
  * Drives the program.
  * @author Mahannah
- * @version 15-12-2022
+ * @version 17/12/2022
  */
 public final class Driver {
     private Driver() { }
@@ -14,17 +14,23 @@ public final class Driver {
      */
     public static void main(final String[] args) {
 
-        Wordle wordle          = new Wordle();
+        Wordle wordle = new Wordle();
+        Player player = new Player();
+
         String playerGuessWord = "";
 
+        System.out.println("------------------\n" +
+                "** WORDLE CLONE **\n" +
+                "------------------");
+
         // Game loop
-        while (wordle.getPlayerTurn() < Wordle.MAX_NUM_TURNS) {
+        while (player.getPlayerTurn() < Player.MAX_NUMBER_PLAYER_TURNS) {
             boolean invalidUserGuess = true;
 
             // Check that player enters a valid word.
             while (invalidUserGuess) {
                 System.out.print("\nEnter a five-letter word: ");
-                playerGuessWord = wordle.askPlayerForGuessWord();
+                playerGuessWord = player.getGuessWord();
 
                 if (!wordle.validLength(playerGuessWord) || !wordle.validCharacters(playerGuessWord)) {
                     System.out.println("The word must contain five letters.");
@@ -43,25 +49,25 @@ public final class Driver {
                 String   letter            = playerWordLetters[index];
 
                 if (wordle.letterInCorrectPosition(letter, wordle.getGameWord(), index)) {
-                    wordle.printLetterWithBackground(letter, Wordle.GREEN_BACKGROUND);
+                    LetterPrinter.printLetterWithBackgroundColor(letter, LetterPrinter.GREEN_BACKGROUND);
                     wordle.updateWinCondition(index);
-                    wordle.removeLetterFromGuessWord(index);
+                    player.removeLetterFromGuessWord(index);
 
                 } else if (wordle.letterInIncorrectPosition(letter, wordle.getGameWord())) {
-                    wordle.printLetterWithBackground(letter, Wordle.YELLOW_BACKGROUND);
-                    wordle.removeLetterFromGuessWord(wordle.getGameWord().indexOf(letter));
+                    LetterPrinter.printLetterWithBackgroundColor(letter, LetterPrinter.YELLOW_BACKGROUND);
+                    player.removeLetterFromGuessWord(wordle.getGameWord().indexOf(letter));
 
                 } else {
-                     wordle.printLetterWithoutBackground(letter);
-                     wordle.removeLetterFromGuessWord(index);
+                     LetterPrinter.printLetterWithoutBackgroundColor(letter);
+                     player.removeLetterFromGuessWord(index);
                  }
             }
-            wordle.incrementPlayerTurn();
-            System.out.println("\nYou have " + (Wordle.MAX_NUM_TURNS - wordle.getPlayerTurn()) + " turns remaining.");
+            player.incrementPlayerTurn();
+            System.out.println("\nYou have " + (Player.MAX_NUMBER_PLAYER_TURNS - player.getPlayerTurn()) + " turns remaining.");
 
             if (wordle.winConditionMet()) {
                 System.out.println("\nCongratulations! You won with "
-                        + (Wordle.MAX_NUM_TURNS - wordle.getPlayerTurn()) + " turn(s) remaining.");
+                        + (Player.MAX_NUMBER_PLAYER_TURNS - player.getPlayerTurn()) + " turn(s) remaining.");
                 System.exit(0);
             }
         }

@@ -1,15 +1,29 @@
 package com.example.wordle_clone;
 
 /**
- * A Printer class with static methods.
+ * A LetterPrinter class with static methods.
  * @author Mahannah
- * @version 17-12-22
+ * @version 17/12/22
  */
 public final class LetterPrinter {
-    private static final String BACKGROUND_COLOR_RESET = "\u001B[0m";
 
     /**
-     * This class contains public static methods only.
+     * Green background -- correct letter in correct spot.
+     */
+    public static final String GREEN_BACKGROUND = "\u001B[42m";
+
+    /**
+     * Yellow background -- correct letter in incorrect spot.
+     */
+    public static final String YELLOW_BACKGROUND = "\u001B[43m";
+
+    /**
+     * Resets background to default (no color).
+     */
+    public static final String BACKGROUND_COLOR_RESET = "\u001B[0m";
+
+    /**
+     * The LetterPrinter class contains public static methods only.
      */
     private LetterPrinter() { }
 
@@ -27,7 +41,7 @@ public final class LetterPrinter {
     /**
      * Prints a single space, a letter, then a single space.
      *
-     * @param letter the letter to be evaluated (char).
+     * @param letter the letter (char) to be evaluated.
      */
     public static void printLetterWithoutBackgroundColor(final String letter) {
         System.out.print(" " + letter.toUpperCase() + " ");
