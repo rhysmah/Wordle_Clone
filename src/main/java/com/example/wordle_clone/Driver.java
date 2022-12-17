@@ -56,13 +56,14 @@ public final class Driver {
                      wordle.removeLetterFromGuessWord(index);
                  }
             }
-            if (wordle.winConditionMet()) {
-                System.out.println("\nCongratulations! You won with "
-                        + (Wordle.MAX_NUM_TURNS - wordle.getPlayerTurn()) + " turn remaining.");
-                System.exit(0);
-            }
             wordle.incrementPlayerTurn();
             System.out.println("\nYou have " + (Wordle.MAX_NUM_TURNS - wordle.getPlayerTurn()) + " turns remaining.");
+
+            if (wordle.winConditionMet()) {
+                System.out.println("\nCongratulations! You won with "
+                        + (Wordle.MAX_NUM_TURNS - wordle.getPlayerTurn()) + " turn(s) remaining.");
+                System.exit(0);
+            }
         }
         System.out.println("You lost! The word was " + wordle.getGameWord());
     }

@@ -38,7 +38,6 @@ public class Wordle {
 
     private static final Random RANDOM      = new Random();
     private static final String ALL_LETTERS = "^[a-zA-Z]*$";
-    private static final String ANSI_RESET  = "\u001B[0m";
 
     private final String    gameWord;
     private final boolean[] winCondition;
@@ -89,26 +88,6 @@ public class Wordle {
      */
     public boolean validWord(final String word) {
         return Arrays.asList(WordList.WORDS).contains(word);
-    }
-
-    /**
-     * Prints these characters: a single space, a letter, then a single space.
-     * All three characters have a colored background, defined by an ANSI code.
-     *
-     * @param letter the letter to be evaluated (char)
-     * @param ansiCode the color, as an ANSI code, to use.
-     */
-    public void printLetterWithBackground(final String letter, final String ansiCode) {
-        System.out.print(ansiCode + " " + letter.toUpperCase() + " " + ANSI_RESET);
-    }
-
-    /**
-     * Prints a single space, a letter, then a single space.
-     *
-     * @param letter the letter to be evaluated (char).
-     */
-    public void printLetterWithoutBackground(final String letter) {
-        System.out.print(" " + letter.toUpperCase() + " ");
     }
 
     /**
@@ -176,7 +155,7 @@ public class Wordle {
     }
 
     /**
-     * Returns the win condition, a Boolean array.
+     * Returns the win condition (a Boolean array).
      *
      * @return a Boolean array.
      */
