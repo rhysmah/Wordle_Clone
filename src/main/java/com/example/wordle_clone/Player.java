@@ -34,7 +34,8 @@ public final class Player {
      * @return user word in all uppercase (String).
      */
     public String getGuessWord() {
-        return SCAN.next();
+        guessWord = SCAN.next();
+        return guessWord;
     }
 
     /**

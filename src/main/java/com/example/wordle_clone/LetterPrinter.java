@@ -35,7 +35,7 @@ public final class LetterPrinter {
      * @param backgroundColor the background color name for the letter (String).
      */
     public static void printLetterWithBackgroundColor(final String letter, final String backgroundColor) {
-        System.out.println(backgroundColor + " " + letter.toUpperCase() + " " + BACKGROUND_COLOR_RESET);
+        System.out.print(backgroundColor + " " + letter.toUpperCase() + " " + BACKGROUND_COLOR_RESET);
     }
 
     /**
