@@ -23,8 +23,7 @@ public final class Driver {
                 """
                 ------------------
                 ** WORDLE CLONE **
-                ------------------
-                """);
+                ------------------""");
 
         // Game loop
         while (player.getPlayerTurn() < Player.MAX_NUMBER_PLAYER_TURNS) {
@@ -66,8 +65,7 @@ public final class Driver {
                  }
             }
             if (wordle.winConditionMet()) {
-                System.out.println("\nCongratulations! You won with "
-                        + (Player.MAX_NUMBER_PLAYER_TURNS - player.getPlayerTurn()) + " turn(s) remaining.");
+                System.out.println("\nCongratulations! You guessed the word!");
                 System.exit(0);
             }
             player.incrementPlayerTurn();
