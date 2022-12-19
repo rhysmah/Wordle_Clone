@@ -1,5 +1,7 @@
 package com.example.wordle_clone;
 
+//import java.util.Scanner;
+
 import java.util.Scanner;
 
 /**
@@ -14,7 +16,7 @@ public final class Player {
      */
     public static final int MAX_NUMBER_PLAYER_TURNS = 6;
 
-    private static final Scanner SCAN = new Scanner(System.in);
+//    private static final Scanner SCAN = new Scanner(System.in);
     private static final String  INITIAL_GUESS_WORD_VALUE  = "";
     private static final int     INITIAL_PLAYER_TURN_VALUE = 0;
 
@@ -31,28 +33,20 @@ public final class Player {
 
     /**
      * Sets the guess word.
-     * @param guessWord the new word (String)
+     * @param newGuessWord the new word (String)
      */
-    public void setGuessWord(final String guessWord) {
-        this.guessWord = guessWord;
+    public void setGuessWord(final String newGuessWord) {
+        this.guessWord = newGuessWord;
     }
+
     /**
      * Returns user input
      * @return user word in all uppercase (String).
      */
     public String getGuessWord() {
-        // The below line is for the console version.
-        // guessWord = SCAN.next();
-
+//         The below line is for the console version.
+//         guessWord = SCAN.next();
         return guessWord;
-    }
-
-    /**
-     * Returns the player's turn value.
-     * @return the player's turn (int).
-     */
-    public int getPlayerTurn() {
-        return playerTurn;
     }
 
     /**
@@ -67,6 +61,14 @@ public final class Player {
         String[] wordLetters = guessWord.split("");
         wordLetters[index] = ".";
         guessWord = String.join("", wordLetters);
+    }
+
+    /**
+     * Returns the player's turn value.
+     * @return the player's turn (int).
+     */
+    public int getPlayerTurn() {
+        return playerTurn;
     }
 
     /**

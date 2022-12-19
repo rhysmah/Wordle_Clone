@@ -1,5 +1,7 @@
 package com.example.wordle_clone;
 
+import java.util.Scanner;
+
 /**
  * Drives the program.
  * @author Mahannah
@@ -13,6 +15,8 @@ public final class Driver {
      * @param args to be read.
      */
     public static void main(final String[] args) {
+
+        Scanner scan = new Scanner(System.in);
 
         Wordle wordle = new Wordle();
         Player player = new Player();
@@ -32,7 +36,8 @@ public final class Driver {
             // Check that player enters a valid word.
             while (invalidUserGuess) {
                 System.out.print("\nEnter a five-letter word: ");
-                playerGuessWord = player.getGuessWord();
+                playerGuessWord = scan.next();
+                player.setGuessWord(playerGuessWord);
 
                 if (!wordle.validLength(playerGuessWord) || !wordle.validCharacters(playerGuessWord)) {
                     System.out.println("The word must contain five letters.");

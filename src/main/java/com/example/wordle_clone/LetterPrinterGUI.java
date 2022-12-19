@@ -12,17 +12,17 @@ public final class LetterPrinterGUI {
     /**
      * Grey background -- correct letter in correct spot.
      */
-    public static final String GREY = " #DCDCDC";
+    public static final String GREY = "#DCDCDC;";
 
     /**
      * Green background -- correct letter in correct spot.
      */
-    public static final String GREEN = "#3CB371";
+    public static final String GREEN = "#3CB371;";
 
     /**
      * Yellow background -- correct letter in incorrect spot.
      */
-    public static final String YELLOW = "#FFD700";
+    public static final String YELLOW = "#FFD700;";
 
     /**
      * The LetterPrinter class contains public static methods only.
@@ -34,9 +34,11 @@ public final class LetterPrinterGUI {
      * the specified background color.
      *
      * @param label the node whose background color will be changed.
-     * @param backgroundColor the background color name for the letter (String).
+     * @param letter the letter (String) to be printed.
+     * @param backgroundColor the background color name (String).
      */
-    public static void printLetterBackground(final Label label, final String backgroundColor) {
-        label.setStyle("-fx-background-color:" + backgroundColor);
+    public static void printLetter(final Label label, final String letter, final String backgroundColor) {
+        label.setText(letter);
+        label.setStyle("-fx-background-color: " + backgroundColor);
     }
 }
