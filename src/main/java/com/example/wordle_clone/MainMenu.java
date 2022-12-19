@@ -12,7 +12,7 @@ public class MainMenu extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainMenu.class.getResource("/main-menu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Wordle Clone: Main Menu");
+        stage.setTitle("Wordle Clone");
         stage.setScene(scene);
         stage.show();
     }

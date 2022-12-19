@@ -1,21 +1,20 @@
 .root {
-    -fx-font-family: Impact;
+    -fx-font-family: Arial;
     -fx-spacing:     15px;
+    -fx-font-weight: bold;
 }
 
 .button {
     -fx-font-size:  16px;
     -fx-padding:    10px;
-    -fx-pref-width: 100px;
+    -fx-pref-width: 120x;
 }
 
 #main-menu-title {
-    -fx-font-size:   50;
-    -fx-font-weight: bold;
+    -fx-font-size:   45;
 }
 
 #main-menu-footer {
-    -fx-font-size:   14;
-    -fx-font-weight: light;
+    -fx-font-size:   16px;
     -fx-translate-y: 5px;
 }

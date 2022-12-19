@@ -9,7 +9,6 @@ import java.util.Random;
  * @version 17-12-22
  */
 public class Wordle {
-
     /**
      * Maximum allowable number of letters per word.
      */
@@ -25,8 +24,8 @@ public class Wordle {
      * Creates an object of type Wordle.
      */
     public Wordle() {
-        this.gameWord        = WordList.WORDS[RANDOM_NUMBER_GENERATOR.nextInt(WordList.WORDS.length) - 1].toUpperCase();
-        this.winCondition    = new boolean[LETTERS_PER_WORD];
+        this.gameWord     = WordList.WORDS[RANDOM_NUMBER_GENERATOR.nextInt(WordList.WORDS.length) - 1].toUpperCase();
+        this.winCondition = new boolean[LETTERS_PER_WORD];
     }
 
     /**
@@ -86,8 +85,8 @@ public class Wordle {
     }
 
     /**
-     * Adds Boolean true to the specific index position.
-     * @param index the index of the boolean array (int).
+     * Adds Boolean "true" to the specified index position.
+     * @param index the index of the winCondition boolean array (int).
      */
     public void updateWinCondition(final int index) {
         winCondition[index] = true;

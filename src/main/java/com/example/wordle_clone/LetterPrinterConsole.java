@@ -3,9 +3,9 @@ package com.example.wordle_clone;
 /**
  * A LetterPrinter class with static methods.
  * @author Mahannah
- * @version 17/12/22
+ * @version 18-12-22
  */
-public final class LetterPrinter {
+public final class LetterPrinterConsole {
 
     /**
      * Green background -- correct letter in correct spot.
@@ -25,7 +25,7 @@ public final class LetterPrinter {
     /**
      * The LetterPrinter class contains public static methods only.
      */
-    private LetterPrinter() { }
+    private LetterPrinterConsole() { }
 
     /**
      * Prints a single space, a letter, then a single space, all with

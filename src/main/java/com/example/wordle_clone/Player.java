@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * Represents a Wordle Player.
  * @author Mahannah
- * @version 17/12/22
+ * @version 17-12-22
  */
 public final class Player {
 
@@ -30,11 +30,20 @@ public final class Player {
     }
 
     /**
-     * Asks user to input a word.
+     * Sets the guess word.
+     * @param guessWord the new word (String)
+     */
+    public void setGuessWord(final String guessWord) {
+        this.guessWord = guessWord;
+    }
+    /**
+     * Returns user input
      * @return user word in all uppercase (String).
      */
     public String getGuessWord() {
-        guessWord = SCAN.next();
+        // The below line is for the console version.
+        // guessWord = SCAN.next();
+
         return guessWord;
     }
 

@@ -3,7 +3,7 @@ package com.example.wordle_clone;
 /**
  * Drives the program.
  * @author Mahannah
- * @version 17/12/2022
+ * @version 17-12-2022
  */
 public final class Driver {
     private Driver() { }
@@ -22,7 +22,7 @@ public final class Driver {
         System.out.println(
                 """
                 ------------------
-                ** WORDLE CLONE **
+                -- WORDLE CLONE --
                 ------------------""");
 
         // Game loop
@@ -51,16 +51,16 @@ public final class Driver {
                 String   letter            = playerWordLetters[index];
 
                 if (wordle.letterInCorrectPosition(letter, wordle.getGameWord(), index)) {
-                    LetterPrinter.printLetterWithBackgroundColor(letter, LetterPrinter.GREEN_BACKGROUND);
+                    LetterPrinterConsole.printLetterWithBackgroundColor(letter, LetterPrinterConsole.GREEN_BACKGROUND);
                     wordle.updateWinCondition(index);
                     player.removeLetterFromGuessWord(index);
 
                 } else if (wordle.letterInIncorrectPosition(letter, wordle.getGameWord())) {
-                    LetterPrinter.printLetterWithBackgroundColor(letter, LetterPrinter.YELLOW_BACKGROUND);
+                    LetterPrinterConsole.printLetterWithBackgroundColor(letter, LetterPrinterConsole.YELLOW_BACKGROUND);
                     player.removeLetterFromGuessWord(wordle.getGameWord().indexOf(letter));
 
                 } else {
-                     LetterPrinter.printLetterWithoutBackgroundColor(letter);
+                     LetterPrinterConsole.printLetterWithoutBackgroundColor(letter);
                      player.removeLetterFromGuessWord(index);
                  }
             }
