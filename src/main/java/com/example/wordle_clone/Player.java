@@ -1,9 +1,5 @@
 package com.example.wordle_clone;
 
-//import java.util.Scanner;
-
-import java.util.Scanner;
-
 /**
  * Represents a Wordle Player.
  * @author Mahannah
@@ -16,7 +12,6 @@ public final class Player {
      */
     public static final int MAX_NUMBER_PLAYER_TURNS = 6;
 
-//    private static final Scanner SCAN = new Scanner(System.in);
     private static final String  INITIAL_GUESS_WORD_VALUE  = "";
     private static final int     INITIAL_PLAYER_TURN_VALUE = 0;
 
@@ -40,27 +35,11 @@ public final class Player {
     }
 
     /**
-     * Returns user input
+     * Returns user input.
      * @return user word in all uppercase (String).
      */
     public String getGuessWord() {
-//         The below line is for the console version.
-//         guessWord = SCAN.next();
         return guessWord;
-    }
-
-    /**
-     * Removes specified letter from word.
-     * <p>
-     * Word is split into a String array; the specified letter is replaced
-     * with a period ("."), then the String is concatenated.
-     *
-     * @param index the index of the letter to be removed (int).
-     */
-    public void removeLetterFromGuessWord(final int index) {
-        String[] wordLetters = guessWord.split("");
-        wordLetters[index] = ".";
-        guessWord = String.join("", wordLetters);
     }
 
     /**

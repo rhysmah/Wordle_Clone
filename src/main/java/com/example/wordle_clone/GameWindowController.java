@@ -2,7 +2,6 @@ package com.example.wordle_clone;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
 /**
  * Controls the GameWindow class.
@@ -11,14 +10,17 @@ import javafx.scene.control.TextField;
  */
 public class GameWindowController {
 
-    private final Wordle wordle;
-    private final Player player;
+    private static final int MAX_WORD_LENGTH = 5;
+
+    private final Wordle    wordle;
+    private final Player    player;
+    private final Label[][] gameBoard;
+    private final String[]  word;
 
     /*
      * As per Wordle game rules, there are six rows, with five letters per row, for a
      * total of 30 letters. Each Label, below, represents one of the those letters.
      */
-
     // Row 1
     @FXML private Label box00;
     @FXML private Label box01;
@@ -61,10 +63,8 @@ public class GameWindowController {
     @FXML private Label box53;
     @FXML private Label box54;
 
-    // Where the player writes in their guess word.
-    @FXML private TextField inputBox;
-
     private int rowIndex = 0;
+    private int letterCounter = 0;
 
     /**
      * Creates an object of type GameWindowController.
@@ -72,31 +72,195 @@ public class GameWindowController {
     public GameWindowController() {
         wordle = new Wordle();
         player = new Player();
-    }
+        word   = new String[MAX_WORD_LENGTH];
 
-    /**
-     * Checks user-inputted word against conditions, then prints the
-     * word to the GUI using colors based on the different conditions.
-     */
-    @FXML
-    protected void onCheckGuessButtonClick() {
-
-        Label[][] gameBoard = {
+        gameBoard = new Label[][] {
                 {box00, box01, box02, box03, box04},
                 {box10, box11, box12, box13, box14},
                 {box20, box21, box22, box23, box24},
                 {box30, box31, box32, box33, box34},
                 {box40, box41, box42, box43, box44},
                 {box50, box51, box52, box53, box54}};
+    }
 
+    protected void aButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "a";
+            letterCounter++;
+        }
+    }
+
+    protected void bButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "b";
+            letterCounter++;
+        }
+    }
+
+    protected void cButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "c";
+            letterCounter++;
+        }
+    }
+
+    protected void dButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "d";
+            letterCounter++;
+        }
+    }
+
+    protected void eButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "e";
+            letterCounter++;
+        }
+    }
+
+    protected void fButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "f";
+            letterCounter++;
+        }
+    }
+
+    protected void gButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "g";
+            letterCounter++;
+        }
+    }
+
+    protected void hButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "h";
+            letterCounter++;
+        }
+    }
+
+    protected void iButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "i";
+            letterCounter++;
+        }
+    }
+    protected void jButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "j";
+            letterCounter++;
+        }
+    }
+    protected void kButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "k";
+            letterCounter++;
+        }
+    }
+    protected void lButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "l";
+            letterCounter++;
+        }
+    }
+    protected void mButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "m";
+            letterCounter++;
+        }
+    }
+    protected void nButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "n";
+            letterCounter++;
+        }
+    }
+    protected void oButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "o";
+            letterCounter++;
+        }
+    }
+    protected void pButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "p";
+            letterCounter++;
+        }
+    }
+    protected void qButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "q";
+            letterCounter++;
+        }
+    }
+    protected void rButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "r";
+            letterCounter++;
+        }
+    }
+    protected void sButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "s";
+            letterCounter++;
+        }
+    }
+    protected void tButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "t";
+            letterCounter++;
+        }
+    }
+    protected void uButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "u";
+            letterCounter++;
+        }
+    }
+    protected void vButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "v";
+            letterCounter++;
+        }
+    }
+    protected void wButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "w";
+            letterCounter++;
+        }
+    }
+    protected void xButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "x";
+            letterCounter++;
+        }
+    }
+    protected void yButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "y";
+            letterCounter++;
+        }
+    }
+    protected void zButtonClicked() {
+        if (letterCounter < MAX_WORD_LENGTH) {
+            word[letterCounter] = "z";
+            letterCounter++;
+        }
+    }
+
+    /**
+     * Checks user-inputted word against conditions, then prints the
+     * word to the GUI using colors based on the different conditions.
+     */
+    @FXML protected void onEnterButtonClick() {
 
         // Player gets limited number of guesses.
         while (player.getPlayerTurn() < Player.MAX_NUMBER_PLAYER_TURNS) {
 
             // Validate user guess.
-            player.setGuessWord("");
             do {
-                player.setGuessWord(inputBox.getText());
+                String playerWord = String.join("", word);
+                player.setGuessWord(playerWord);
             } while (!wordle.validateUserGuess(player.getGuessWord()));
 
             // Compare user guess against game word; color letters as required.
@@ -112,6 +276,7 @@ public class GameWindowController {
 
                 if (!wordle.getGameWord().contains(letter)) {
                     LetterPrinter.printLetter(letterBox, LetterPrinter.GREY);
+                    wordle.updateWinCondition(letterIndex);
                 } else if (letter.equals(gameWordLetters[letterIndex])) {
                     LetterPrinter.printLetter(letterBox, LetterPrinter.GREEN);
                 } else {
@@ -125,6 +290,7 @@ public class GameWindowController {
                 System.out.println("\nCongratulations! You guessed the word!");
                 System.exit(0);
             }
+            player.incrementPlayerTurn();
         }
         System.out.println("You lost! The word was " + wordle.getGameWord());
     }

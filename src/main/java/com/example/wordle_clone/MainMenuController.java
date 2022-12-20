@@ -1,19 +1,17 @@
 package com.example.wordle_clone;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 /**
  * Controls the main menu, which drives the program.
- * @author Mahannah 2022
+ * @author Mahannah
  * @version 18-12-2022
  */
 public class MainMenuController {
 
     private static final String MAIN_MENU_WINDOW_TITLE = "Wordle Clone";
-    
     @FXML private Button quitGameButton;
 
     /**

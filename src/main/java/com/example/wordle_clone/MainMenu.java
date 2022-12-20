@@ -7,9 +7,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Represents a main menu.
+ * @author Mahannah
+ * @version 20-12-22
+ */
 public class MainMenu extends Application {
+
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(final Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainMenu.class.getResource("/main-menu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Wordle Clone");
@@ -17,7 +23,11 @@ public class MainMenu extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    /**
+     * Drives the program.
+     * @param args to be passed.
+     */
+    public static void main(final String[] args) {
         launch();
     }
 }
