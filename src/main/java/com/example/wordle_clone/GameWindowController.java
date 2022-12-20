@@ -15,51 +15,82 @@ public class GameWindowController {
     private final Player player = new Player();
 
     // Row 1
-    @FXML private Label box00;
-    @FXML private Label box01;
-    @FXML private Label box02;
-    @FXML private Label box03;
-    @FXML private Label box04;
+    @FXML
+    private Label box00;
+    @FXML
+    private Label box01;
+    @FXML
+    private Label box02;
+    @FXML
+    private Label box03;
+    @FXML
+    private Label box04;
 
     // Row 2
-    @FXML private Label box10;
-    @FXML private Label box11;
-    @FXML private Label box12;
-    @FXML private Label box13;
-    @FXML private Label box14;
+    @FXML
+    private Label box10;
+    @FXML
+    private Label box11;
+    @FXML
+    private Label box12;
+    @FXML
+    private Label box13;
+    @FXML
+    private Label box14;
 
     // Row 3
-    @FXML private Label box20;
-    @FXML private Label box21;
-    @FXML private Label box22;
-    @FXML private Label box23;
-    @FXML private Label box24;
+    @FXML
+    private Label box20;
+    @FXML
+    private Label box21;
+    @FXML
+    private Label box22;
+    @FXML
+    private Label box23;
+    @FXML
+    private Label box24;
 
     // Row 4
-    @FXML private Label box30;
-    @FXML private Label box31;
-    @FXML private Label box32;
-    @FXML private Label box33;
-    @FXML private Label box34;
+    @FXML
+    private Label box30;
+    @FXML
+    private Label box31;
+    @FXML
+    private Label box32;
+    @FXML
+    private Label box33;
+    @FXML
+    private Label box34;
 
     // Row 5
-    @FXML private Label box40;
-    @FXML private Label box41;
-    @FXML private Label box42;
-    @FXML private Label box43;
-    @FXML private Label box44;
+    @FXML
+    private Label box40;
+    @FXML
+    private Label box41;
+    @FXML
+    private Label box42;
+    @FXML
+    private Label box43;
+    @FXML
+    private Label box44;
 
     // Row 6
-    @FXML private Label box50;
-    @FXML private Label box51;
-    @FXML private Label box52;
-    @FXML private Label box53;
-    @FXML private Label box54;
+    @FXML
+    private Label box50;
+    @FXML
+    private Label box51;
+    @FXML
+    private Label box52;
+    @FXML
+    private Label box53;
+    @FXML
+    private Label box54;
 
-    private int    rowIndex = 0;
+    private int rowIndex = 0;
     private String gameWord;
 
-    @FXML private TextField inputBox;
+    @FXML
+    private TextField inputBox;
 
     /**
      * Creates an object of type GameWindowController.
@@ -85,25 +116,29 @@ public class GameWindowController {
 
         String playerGuessWord = inputBox.getText();
         player.setGuessWord(playerGuessWord);
+        System.out.println(gameWord);
 
         for (int index = 0; index < Wordle.LETTERS_PER_WORD; index++) {
 
             String[] playerWordLetters = playerGuessWord.toUpperCase().split("");
             String   letter            = playerWordLetters[index];
-            Label    letterBox         = gameBoard[rowIndex][index];
 
-            if (wordle.letterInCorrectPosition(letter, gameWord, index)) {
-                LetterPrinterGUI.printLetter(letterBox, letter, LetterPrinterGUI.GREEN);
-                wordle.updateWinCondition(index);
-                gameWord = LetterRemover.removeLetter(gameWord, index);
+            String[] gameWordLetters = gameWord.toUpperCase().split("");
+            Label    letterBox       = gameBoard[rowIndex][index];
 
-            } else if (wordle.letterInIncorrectPosition(letter, gameWord)) {
-                LetterPrinterGUI.printLetter(letterBox, letter, LetterPrinterGUI.YELLOW);
-                gameWord = LetterRemover.removeLetter(gameWord, wordle.getGameWord().indexOf(letter));
-
-            } else {
+            /*
+             * If the letter is NOT in the game word, the tile is grey.
+             *
+             * If the letter is in the game word, in the exact right spot, the tile is green.
+             *
+             * If the letter is in the game word, but NOT in the right spot, the tile is yellow.
+             */
+            if (!gameWord.contains(letter)) {
                 LetterPrinterGUI.printLetter(letterBox, letter, LetterPrinterGUI.GREY);
-                gameWord = LetterRemover.removeLetter(gameWord, index);
+            } else if (letter.equals(gameWordLetters[index])) {
+                LetterPrinterGUI.printLetter(letterBox, letter, LetterPrinterGUI.GREEN);
+            } else {
+                LetterPrinterGUI.printLetter(letterBox, letter, LetterPrinterGUI.YELLOW);
             }
             if (index == (Wordle.LETTERS_PER_WORD - 1)) {
                 rowIndex++;

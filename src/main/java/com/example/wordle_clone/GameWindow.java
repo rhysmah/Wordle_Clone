@@ -5,6 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Creates a game window.
+ * @author Mahannah
+ * @version 19-12-22
+ */
 public class GameWindow extends Application {
 
     @Override
