@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
  * @author Mahannah
  * @version 18-12-22
  */
-public final class LetterPrinterGUI {
+public final class LetterPrinter {
 
     /**
      * Grey background -- correct letter in correct spot.
@@ -27,18 +27,16 @@ public final class LetterPrinterGUI {
     /**
      * The LetterPrinter class contains public static methods only.
      */
-    private LetterPrinterGUI() { }
+    private LetterPrinter() { }
 
     /**
      * Prints a single space, a letter, then a single space, all with
      * the specified background color.
      *
      * @param label the node whose background color will be changed.
-     * @param letter the letter (String) to be printed.
      * @param backgroundColor the background color name (String).
      */
-    public static void printLetter(final Label label, final String letter, final String backgroundColor) {
-        label.setText(letter);
+    public static void printLetter(final Label label, final String backgroundColor) {
         label.setStyle("-fx-background-color: " + backgroundColor);
     }
 }

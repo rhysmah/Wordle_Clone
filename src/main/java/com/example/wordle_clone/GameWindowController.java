@@ -7,101 +7,76 @@ import javafx.scene.control.TextField;
 /**
  * Controls the GameWindow class.
  * @author Mahannah
- * @version 19-12-22
+ * @version 20-12-22
  */
 public class GameWindowController {
 
-    private final Wordle wordle = new Wordle();
-    private final Player player = new Player();
+    private final Wordle wordle;
+    private final Player player;
+
+    /*
+     * As per Wordle game rules, there are six rows, with five letters per row, for a
+     * total of 30 letters. Each Label, below, represents one of the those letters.
+     */
 
     // Row 1
-    @FXML
-    private Label box00;
-    @FXML
-    private Label box01;
-    @FXML
-    private Label box02;
-    @FXML
-    private Label box03;
-    @FXML
-    private Label box04;
+    @FXML private Label box00;
+    @FXML private Label box01;
+    @FXML private Label box02;
+    @FXML private Label box03;
+    @FXML private Label box04;
 
     // Row 2
-    @FXML
-    private Label box10;
-    @FXML
-    private Label box11;
-    @FXML
-    private Label box12;
-    @FXML
-    private Label box13;
-    @FXML
-    private Label box14;
+    @FXML private Label box10;
+    @FXML private Label box11;
+    @FXML private Label box12;
+    @FXML private Label box13;
+    @FXML private Label box14;
 
     // Row 3
-    @FXML
-    private Label box20;
-    @FXML
-    private Label box21;
-    @FXML
-    private Label box22;
-    @FXML
-    private Label box23;
-    @FXML
-    private Label box24;
+    @FXML private Label box20;
+    @FXML private Label box21;
+    @FXML private Label box22;
+    @FXML private Label box23;
+    @FXML private Label box24;
 
     // Row 4
-    @FXML
-    private Label box30;
-    @FXML
-    private Label box31;
-    @FXML
-    private Label box32;
-    @FXML
-    private Label box33;
-    @FXML
-    private Label box34;
+    @FXML private Label box30;
+    @FXML private Label box31;
+    @FXML private Label box32;
+    @FXML private Label box33;
+    @FXML private Label box34;
 
     // Row 5
-    @FXML
-    private Label box40;
-    @FXML
-    private Label box41;
-    @FXML
-    private Label box42;
-    @FXML
-    private Label box43;
-    @FXML
-    private Label box44;
+    @FXML private Label box40;
+    @FXML private Label box41;
+    @FXML private Label box42;
+    @FXML private Label box43;
+    @FXML private Label box44;
 
     // Row 6
-    @FXML
-    private Label box50;
-    @FXML
-    private Label box51;
-    @FXML
-    private Label box52;
-    @FXML
-    private Label box53;
-    @FXML
-    private Label box54;
+    @FXML private Label box50;
+    @FXML private Label box51;
+    @FXML private Label box52;
+    @FXML private Label box53;
+    @FXML private Label box54;
+
+    // Where the player writes in their guess word.
+    @FXML private TextField inputBox;
 
     private int rowIndex = 0;
-    private String gameWord;
-
-    @FXML
-    private TextField inputBox;
 
     /**
      * Creates an object of type GameWindowController.
      */
     public GameWindowController() {
-        this.gameWord = wordle.getGameWord();
+        wordle = new Wordle();
+        player = new Player();
     }
 
     /**
      * Checks user-inputted word against conditions, then prints the
-     * word to the GUI using colors assigned to those different conditions.
+     * word to the GUI using colors based on the different conditions.
      */
     @FXML
     protected void onCheckGuessButtonClick() {
@@ -114,35 +89,43 @@ public class GameWindowController {
                 {box40, box41, box42, box43, box44},
                 {box50, box51, box52, box53, box54}};
 
-        String playerGuessWord = inputBox.getText();
-        player.setGuessWord(playerGuessWord);
-        System.out.println(gameWord);
 
-        for (int index = 0; index < Wordle.LETTERS_PER_WORD; index++) {
+        // Player gets limited number of guesses.
+        while (player.getPlayerTurn() < Player.MAX_NUMBER_PLAYER_TURNS) {
 
-            String[] playerWordLetters = playerGuessWord.toUpperCase().split("");
-            String   letter            = playerWordLetters[index];
+            // Validate user guess.
+            player.setGuessWord("");
+            do {
+                player.setGuessWord(inputBox.getText());
+            } while (!wordle.validateUserGuess(player.getGuessWord()));
 
-            String[] gameWordLetters = gameWord.toUpperCase().split("");
-            Label    letterBox       = gameBoard[rowIndex][index];
+            // Compare user guess against game word; color letters as required.
+            for (int letterIndex = 0; letterIndex < Wordle.LETTERS_PER_WORD; letterIndex++) {
 
-            /*
-             * If the letter is NOT in the game word, the tile is grey.
-             *
-             * If the letter is in the game word, in the exact right spot, the tile is green.
-             *
-             * If the letter is in the game word, but NOT in the right spot, the tile is yellow.
-             */
-            if (!gameWord.contains(letter)) {
-                LetterPrinterGUI.printLetter(letterBox, letter, LetterPrinterGUI.GREY);
-            } else if (letter.equals(gameWordLetters[index])) {
-                LetterPrinterGUI.printLetter(letterBox, letter, LetterPrinterGUI.GREEN);
-            } else {
-                LetterPrinterGUI.printLetter(letterBox, letter, LetterPrinterGUI.YELLOW);
+                String[] playerWordLetters = player.getGuessWord().split("");
+                String[] gameWordLetters = wordle.getGameWord().split("");
+                String letter = playerWordLetters[letterIndex];
+
+                // The Label node that displays the letters.
+                Label letterBox = gameBoard[rowIndex][letterIndex];
+                letterBox.setText(letter.toUpperCase());
+
+                if (!wordle.getGameWord().contains(letter)) {
+                    LetterPrinter.printLetter(letterBox, LetterPrinter.GREY);
+                } else if (letter.equals(gameWordLetters[letterIndex])) {
+                    LetterPrinter.printLetter(letterBox, LetterPrinter.GREEN);
+                } else {
+                    LetterPrinter.printLetter(letterBox, LetterPrinter.YELLOW);
+                }
+                if (letterIndex == (Wordle.LETTERS_PER_WORD - 1)) {
+                    rowIndex++;
+                }
             }
-            if (index == (Wordle.LETTERS_PER_WORD - 1)) {
-                rowIndex++;
+            if (wordle.winConditionMet()) {
+                System.out.println("\nCongratulations! You guessed the word!");
+                System.exit(0);
             }
         }
+        System.out.println("You lost! The word was " + wordle.getGameWord());
     }
 }

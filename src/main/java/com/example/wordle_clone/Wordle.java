@@ -9,6 +9,7 @@ import java.util.Random;
  * @version 17-12-22
  */
 public class Wordle {
+
     /**
      * Maximum allowable number of letters per word.
      */
@@ -24,56 +25,38 @@ public class Wordle {
      * Creates an object of type Wordle.
      */
     public Wordle() {
-        this.gameWord     = WordList.WORDS[RANDOM_NUMBER_GENERATOR.nextInt(WordList.WORDS.length) - 1].toUpperCase();
+        this.gameWord     = WordList.WORDS[RANDOM_NUMBER_GENERATOR.nextInt(WordList.WORDS.length) - 1];
         this.winCondition = new boolean[LETTERS_PER_WORD];
     }
 
-    /**
+    /*
      * Checks that a word contains specified letters per word.
-     * @param word the word (String) to be evaluated.
-     * @return true if the word contains valid letters per word, else false.
      */
-    public boolean validLength(final String word) {
+    private boolean validLength(final String word) {
         return word.length() == LETTERS_PER_WORD;
     }
 
-    /**
+    /*
      * Checks that a word contains valid characters.
-     * @param word the word (String) to be evaluated.
-     * @return true if the word contains valid characters, else false.
      */
-    public boolean validCharacters(final String word) {
+    private boolean validCharacters(final String word) {
         return word.matches(CONTAINS_VALID_CHARACTERS);
     }
 
-    /**
+    /*
      * Checks if the userWord is in the word list.
-     * @param word the user's word (String).
-     * @return true if the user's word is in the word list, else false.
      */
-    public boolean validWord(final String word) {
+    private boolean validWord(final String word) {
         return Arrays.asList(WordList.WORDS).contains(word);
     }
 
     /**
-     * Returns true if the specified letter is located at the specified index position in the word.
-     * @param letter the letter to be evaluated (char).
-     * @param word the word to be evaluated (String).
-     * @param index the letter's index position to be evaluated (int).
-     * @return true if the specified letter is located at the specified index position of the word, else false.
+     * Checks that word contains exactly five letters and is a valid English word.
+     * @param word the word (String) to be validated.
+     * @return true if the word is a real five-letter word.
      */
-    public boolean letterInCorrectPosition(final String letter, final String word, final int index) {
-        return letter.equals(word.substring(index, index + 1));
-    }
-
-    /**
-     * Returns true if the letter is located in the word.
-     * @param word the word to be evaluated.
-     * @param letter the letter to be evaluated.
-     * @return true if the letter is located in the word, else false.
-     */
-    public boolean letterInIncorrectPosition(final String letter, final String word) {
-        return word.contains(letter);
+    public boolean validateUserGuess(final String word) {
+        return validLength(word) && validCharacters(word) && validWord(word);
     }
 
     /**
