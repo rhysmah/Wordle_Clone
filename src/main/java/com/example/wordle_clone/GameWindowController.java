@@ -1,7 +1,12 @@
 package com.example.wordle_clone;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+
+import java.util.ArrayList;
 
 /**
  * Controls the GameWindow class.
@@ -14,7 +19,6 @@ public class GameWindowController {
 
     private final Wordle    wordle;
     private final Player    player;
-    private final Label[][] gameBoard;
     private final String[]  word;
 
     /*
@@ -22,276 +26,198 @@ public class GameWindowController {
      * total of 30 letters. Each Label, below, represents one of the those letters.
      */
     // Row 1
-    @FXML private Label box00;
-    @FXML private Label box01;
-    @FXML private Label box02;
-    @FXML private Label box03;
-    @FXML private Label box04;
+    @FXML private Label box00 = new Label();
+    @FXML private Label box01 = new Label();
+    @FXML private Label box02 = new Label();
+    @FXML private Label box03 = new Label();
+    @FXML private Label box04 = new Label();
 
     // Row 2
-    @FXML private Label box10;
-    @FXML private Label box11;
-    @FXML private Label box12;
-    @FXML private Label box13;
-    @FXML private Label box14;
+    @FXML private Label box10 = new Label();
+    @FXML private Label box11 = new Label();
+    @FXML private Label box12 = new Label();
+    @FXML private Label box13 = new Label();
+    @FXML private Label box14 = new Label();
 
     // Row 3
-    @FXML private Label box20;
-    @FXML private Label box21;
-    @FXML private Label box22;
-    @FXML private Label box23;
-    @FXML private Label box24;
+    @FXML private Label box20 = new Label();
+    @FXML private Label box21 = new Label();
+    @FXML private Label box22 = new Label();
+    @FXML private Label box23 = new Label();
+    @FXML private Label box24 = new Label();
 
     // Row 4
-    @FXML private Label box30;
-    @FXML private Label box31;
-    @FXML private Label box32;
-    @FXML private Label box33;
-    @FXML private Label box34;
+    @FXML private Label box30 = new Label();
+    @FXML private Label box31 = new Label();
+    @FXML private Label box32 = new Label();
+    @FXML private Label box33 = new Label();
+    @FXML private Label box34 = new Label();
 
     // Row 5
-    @FXML private Label box40;
-    @FXML private Label box41;
-    @FXML private Label box42;
-    @FXML private Label box43;
-    @FXML private Label box44;
+    @FXML private Label box40 = new Label();
+    @FXML private Label box41 = new Label();
+    @FXML private Label box42 = new Label();
+    @FXML private Label box43 = new Label();
+    @FXML private Label box44 = new Label();
 
     // Row 6
-    @FXML private Label box50;
-    @FXML private Label box51;
-    @FXML private Label box52;
-    @FXML private Label box53;
-    @FXML private Label box54;
+    @FXML private Label box50 = new Label();
+    @FXML private Label box51 = new Label();
+    @FXML private Label box52 = new Label();
+    @FXML private Label box53 = new Label();
+    @FXML private Label box54 = new Label();
 
-    private int rowIndex = 0;
+    // Buttons
+    @FXML private Button enter;
+    @FXML private Button backspace;
+    @FXML private Button a;
+    @FXML private Button b;
+    @FXML private Button c;
+    @FXML private Button d;
+    @FXML private Button e;
+    @FXML private Button f;
+    @FXML private Button g;
+    @FXML private Button h;
+    @FXML private Button i;
+    @FXML private Button j;
+    @FXML private Button k;
+    @FXML private Button l;
+    @FXML private Button m;
+    @FXML private Button n;
+    @FXML private Button o;
+    @FXML private Button p;
+    @FXML private Button q;
+    @FXML private Button r;
+    @FXML private Button s;
+    @FXML private Button t;
+    @FXML private Button u;
+    @FXML private Button v;
+    @FXML private Button w;
+    @FXML private Button x;
+    @FXML private Button y;
+    @FXML private Button z;
+
+    @FXML private HBox row1 = new HBox();
+    @FXML private HBox row2 = new HBox();
+    @FXML private HBox row3 = new HBox();
+
+    private int rowIndex      = 0;
+    private int letterIndex   = 0;
     private int letterCounter = 0;
 
     /**
      * Creates an object of type GameWindowController.
      */
     public GameWindowController() {
-        wordle = new Wordle();
-        player = new Player();
-        word   = new String[MAX_WORD_LENGTH];
-
-        gameBoard = new Label[][] {
-                {box00, box01, box02, box03, box04},
-                {box10, box11, box12, box13, box14},
-                {box20, box21, box22, box23, box24},
-                {box30, box31, box32, box33, box34},
-                {box40, box41, box42, box43, box44},
-                {box50, box51, box52, box53, box54}};
-    }
-
-    protected void aButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "a";
-            letterCounter++;
-        }
-    }
-
-    protected void bButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "b";
-            letterCounter++;
-        }
-    }
-
-    protected void cButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "c";
-            letterCounter++;
-        }
-    }
-
-    protected void dButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "d";
-            letterCounter++;
-        }
-    }
-
-    protected void eButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "e";
-            letterCounter++;
-        }
-    }
-
-    protected void fButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "f";
-            letterCounter++;
-        }
-    }
-
-    protected void gButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "g";
-            letterCounter++;
-        }
-    }
-
-    protected void hButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "h";
-            letterCounter++;
-        }
-    }
-
-    protected void iButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "i";
-            letterCounter++;
-        }
-    }
-    protected void jButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "j";
-            letterCounter++;
-        }
-    }
-    protected void kButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "k";
-            letterCounter++;
-        }
-    }
-    protected void lButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "l";
-            letterCounter++;
-        }
-    }
-    protected void mButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "m";
-            letterCounter++;
-        }
-    }
-    protected void nButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "n";
-            letterCounter++;
-        }
-    }
-    protected void oButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "o";
-            letterCounter++;
-        }
-    }
-    protected void pButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "p";
-            letterCounter++;
-        }
-    }
-    protected void qButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "q";
-            letterCounter++;
-        }
-    }
-    protected void rButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "r";
-            letterCounter++;
-        }
-    }
-    protected void sButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "s";
-            letterCounter++;
-        }
-    }
-    protected void tButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "t";
-            letterCounter++;
-        }
-    }
-    protected void uButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "u";
-            letterCounter++;
-        }
-    }
-    protected void vButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "v";
-            letterCounter++;
-        }
-    }
-    protected void wButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "w";
-            letterCounter++;
-        }
-    }
-    protected void xButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "x";
-            letterCounter++;
-        }
-    }
-    protected void yButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "y";
-            letterCounter++;
-        }
-    }
-    protected void zButtonClicked() {
-        if (letterCounter < MAX_WORD_LENGTH) {
-            word[letterCounter] = "z";
-            letterCounter++;
-        }
+        this.wordle = new Wordle();
+        this.player = new Player();
+        this.word = new String[MAX_WORD_LENGTH];
     }
 
     /**
-     * Checks user-inputted word against conditions, then prints the
-     * word to the GUI using colors based on the different conditions.
+     * Initializes all buttons.
      */
-    @FXML protected void onEnterButtonClick() {
+    public void initialize() {
+        a.setOnAction(event -> {
+        });
 
-        // Player gets limited number of guesses.
-        while (player.getPlayerTurn() < Player.MAX_NUMBER_PLAYER_TURNS) {
+        b.setOnAction(event -> {
+        });
 
-            // Validate user guess.
-            do {
-                String playerWord = String.join("", word);
-                player.setGuessWord(playerWord);
-            } while (!wordle.validateUserGuess(player.getGuessWord()));
+        c.setOnAction(event -> {
+        });
 
-            // Compare user guess against game word; color letters as required.
-            for (int letterIndex = 0; letterIndex < Wordle.LETTERS_PER_WORD; letterIndex++) {
+        d.setOnAction(event -> {
+        });
 
-                String[] playerWordLetters = player.getGuessWord().split("");
-                String[] gameWordLetters = wordle.getGameWord().split("");
-                String letter = playerWordLetters[letterIndex];
+        e.setOnAction(event -> {
+        });
 
-                // The Label node that displays the letters.
-                Label letterBox = gameBoard[rowIndex][letterIndex];
-                letterBox.setText(letter.toUpperCase());
+        f.setOnAction(event -> {
+        });
 
-                if (!wordle.getGameWord().contains(letter)) {
-                    LetterPrinter.printLetter(letterBox, LetterPrinter.GREY);
-                    wordle.updateWinCondition(letterIndex);
-                } else if (letter.equals(gameWordLetters[letterIndex])) {
-                    LetterPrinter.printLetter(letterBox, LetterPrinter.GREEN);
-                } else {
-                    LetterPrinter.printLetter(letterBox, LetterPrinter.YELLOW);
-                }
-                if (letterIndex == (Wordle.LETTERS_PER_WORD - 1)) {
-                    rowIndex++;
-                }
-            }
-            if (wordle.winConditionMet()) {
-                System.out.println("\nCongratulations! You guessed the word!");
-                System.exit(0);
-            }
-            player.incrementPlayerTurn();
-        }
-        System.out.println("You lost! The word was " + wordle.getGameWord());
+        g.setOnAction(event -> {
+        });
+
+        h.setOnAction(event -> {
+        });
+
+        i.setOnAction(event -> {
+        });
+
+        j.setOnAction(event -> {
+        });
+
+        k.setOnAction(event -> {
+        });
+
+        l.setOnAction(event -> {
+        });
+
+        m.setOnAction(event -> {
+        });
+
+        n.setOnAction(event -> {
+        });
+
+        o.setOnAction(event -> {
+        });
+
+        p.setOnAction(event -> {
+        });
+
+        q.setOnAction(event -> {
+        });
+
+        r.setOnAction(event -> {
+        });
+
+        s.setOnAction(event -> {
+        });
+
+        t.setOnAction(event -> {
+        });
+
+        u.setOnAction(event -> {
+        });
+
+        v.setOnAction(event -> {
+        });
+
+        w.setOnAction(event -> {
+        });
+
+        x.setOnAction(event -> {
+        });
+
+        y.setOnAction(event -> {
+        });
+
+        z.setOnAction(event -> {
+        });
+
+        enter.setOnAction(event -> {
+
+        });
+
+        backspace.setOnAction(event -> {
+
+        });
     }
+
+
+
+
+//    protected void letterKeyPushed(final String letter) {
+//        gameBoard[0].setText(letter);
+//        if (letterIndex < 5) {
+//        } else {
+//            rowIndex++;
+//            letterIndex = 0;
+//        }
+//    }
+//
+//    protected void enterKeyPushed() { }
+//
+//    protected void backspaceKeyPushed() { }
 }
