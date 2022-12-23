@@ -12,7 +12,6 @@ import javafx.scene.control.Label;
 public class GameWindowController {
 
     private static final int MAX_WORD_LENGTH = 5;
-    private static final int MAX_CHAR_LENGTH = 30;
 
     /*
      * As per Wordle game rules, there are six rows, with five letters per row, for a
