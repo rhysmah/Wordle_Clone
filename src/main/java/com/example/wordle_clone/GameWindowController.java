@@ -166,14 +166,14 @@ public class GameWindowController {
     private void enterButtonClicked() {
         System.out.println(wordle.getGameWord());
         letterIndex = 0;
-        String word = String.join("", userGuess).toLowerCase();
+        String word = String.join("", userGuess);
         if (!wordle.validateUserGuess(word)) {
             System.out.println("NOT A WORD!");
         } else {
             letterIndex = 0;
             while (letterIndex < MAX_WORD_LENGTH) {
-                String[] gameWordArray = wordle.getGameWord().toLowerCase().split("");
-                if (userGuess[letterIndex].toLowerCase().equals(gameWordArray[letterIndex])) {
+                String[] gameWordArray = wordle.getGameWord().split("");
+                if (userGuess[letterIndex].equals(gameWordArray[letterIndex])) {
                     LetterPrinter.printLetter(letters[rowIndex][letterIndex], LetterPrinter.GREEN);
                 } else if (!wordle.getGameWord().contains(userGuess[letterIndex])) {
                     LetterPrinter.printLetter(letters[rowIndex][letterIndex], LetterPrinter.GREY);
