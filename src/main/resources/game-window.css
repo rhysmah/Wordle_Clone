@@ -5,7 +5,7 @@
     -fx-alignment: center;
 }
 
-#enter, #delete {
+#enter, #backspace {
     -fx-pref-width: 70px;
     -fx-pref-height: 40px;
     -fx-alignment: center;

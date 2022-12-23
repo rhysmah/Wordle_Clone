@@ -13,6 +13,9 @@ public class GameWindowController {
 
     private static final int MAX_WORD_LENGTH = 5;
 
+    private final Wordle wordle;
+    private final String[] userGuess;
+
     /*
      * As per Wordle game rules, there are six rows, with five letters per row, for a
      * total of 30 letters. Each Label, below, represents one of the those letters.
@@ -60,6 +63,7 @@ public class GameWindowController {
     @FXML private Label box54;
 
     // Buttons
+    @FXML private Button backspace;
     @FXML private Button enter;
     @FXML private Button a;
     @FXML private Button b;
@@ -88,15 +92,17 @@ public class GameWindowController {
     @FXML private Button y;
     @FXML private Button z;
 
-    private int rowIndex      = 0;
-    private int letterIndex   = 0;
+    private int rowIndex    = 0;
+    private int letterIndex = 0;
+
     private Label[][] letters;
 
     /**
      * Creates an object of type GameWindowController.
      */
     public GameWindowController() {
-        String[] word = new String[MAX_WORD_LENGTH];
+        userGuess = new String[MAX_WORD_LENGTH];
+        wordle = new Wordle();
     }
 
     /**
@@ -115,7 +121,9 @@ public class GameWindowController {
     /**
      * Initializes all buttons.
      */
-    public void initializeLetters() {
+    public void initializeButtons() {
+        backspace.setOnAction(event -> backspaceButtonClicked());
+        enter.setOnAction(event -> enterButtonClicked());
         a.setOnAction(event -> selectLetterLocation("A"));
         b.setOnAction(event -> selectLetterLocation("B"));
         c.setOnAction(event -> selectLetterLocation("C"));
@@ -144,21 +152,43 @@ public class GameWindowController {
         z.setOnAction(event -> selectLetterLocation("Z"));
     }
 
-    /**
-     * Initializes the ENTER button.
+    /*
+     * Adds letters sequentially to each Label.
      */
-    public void initializeEnterButton() {
-        enter.setOnAction(event -> { });
-    }
-
     private void selectLetterLocation(final String letter) {
         if (letterIndex < MAX_WORD_LENGTH) {
             letters[rowIndex][letterIndex].setText(letter);
-        } else {
-            rowIndex++;
-            letterIndex = 0;
-            letters[rowIndex][letterIndex].setText(letter);
+            userGuess[letterIndex] = letter;
+            letterIndex++;
         }
-        letterIndex++;
+    }
+
+    private void enterButtonClicked() {
+        System.out.println(wordle.getGameWord());
+        letterIndex = 0;
+        String word = String.join("", userGuess).toLowerCase();
+        if (!wordle.validateUserGuess(word)) {
+            System.out.println("NOT A WORD!");
+        } else {
+            letterIndex = 0;
+            while (letterIndex < MAX_WORD_LENGTH) {
+                String[] gameWordArray = wordle.getGameWord().toLowerCase().split("");
+                if (userGuess[letterIndex].toLowerCase().equals(gameWordArray[letterIndex])) {
+                    LetterPrinter.printLetter(letters[rowIndex][letterIndex], LetterPrinter.GREEN);
+                } else if (!wordle.getGameWord().contains(userGuess[letterIndex])) {
+                    LetterPrinter.printLetter(letters[rowIndex][letterIndex], LetterPrinter.GREY);
+                } else {
+                    LetterPrinter.printLetter(letters[rowIndex][letterIndex], LetterPrinter.YELLOW);
+                }
+                letterIndex++;
+            }
+        }
+    }
+
+    private void backspaceButtonClicked() {
+        if (letterIndex > 0) {
+            letterIndex--;
+            letters[rowIndex][letterIndex].setText("");
+        }
     }
 }

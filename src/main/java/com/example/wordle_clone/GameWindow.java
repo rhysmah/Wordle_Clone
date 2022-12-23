@@ -12,9 +12,8 @@ import javafx.stage.Stage;
  */
 public class GameWindow extends Application {
 
-    private static final int WINDOW_WIDTH_IN_PIXELS = 500;
+    private static final int WINDOW_WIDTH_IN_PIXELS  = 500;
     private static final int WINDOW_HEIGHT_IN_PIXELS = 650;
-
 
     @Override
     public void start(final Stage stage) throws Exception {
@@ -38,7 +37,7 @@ public class GameWindow extends Application {
     stage.setScene(gameScene);
     stage.show();
     controller.initializeLetterBoxes();
-    controller.initializeLetters();
+    controller.initializeButtons();
     }
 }
 
