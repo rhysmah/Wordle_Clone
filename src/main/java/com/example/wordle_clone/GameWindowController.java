@@ -1,75 +1,67 @@
 package com.example.wordle_clone;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-
-import java.util.ArrayList;
 
 /**
  * Controls the GameWindow class.
  * @author Mahannah
- * @version 20-12-22
+ * @version 23-12-22
  */
 public class GameWindowController {
 
     private static final int MAX_WORD_LENGTH = 5;
-
-    private final Wordle    wordle;
-    private final Player    player;
-    private final String[]  word;
+    private static final int MAX_CHAR_LENGTH = 30;
 
     /*
      * As per Wordle game rules, there are six rows, with five letters per row, for a
      * total of 30 letters. Each Label, below, represents one of the those letters.
      */
     // Row 1
-    @FXML private Label box00 = new Label();
-    @FXML private Label box01 = new Label();
-    @FXML private Label box02 = new Label();
-    @FXML private Label box03 = new Label();
-    @FXML private Label box04 = new Label();
+    @FXML private Label box00;
+    @FXML private Label box01;
+    @FXML private Label box02;
+    @FXML private Label box03;
+    @FXML private Label box04;
 
     // Row 2
-    @FXML private Label box10 = new Label();
-    @FXML private Label box11 = new Label();
-    @FXML private Label box12 = new Label();
-    @FXML private Label box13 = new Label();
-    @FXML private Label box14 = new Label();
+    @FXML private Label box10;
+    @FXML private Label box11;
+    @FXML private Label box12;
+    @FXML private Label box13;
+    @FXML private Label box14;
 
     // Row 3
-    @FXML private Label box20 = new Label();
-    @FXML private Label box21 = new Label();
-    @FXML private Label box22 = new Label();
-    @FXML private Label box23 = new Label();
-    @FXML private Label box24 = new Label();
+    @FXML private Label box20;
+    @FXML private Label box21;
+    @FXML private Label box22;
+    @FXML private Label box23;
+    @FXML private Label box24;
 
     // Row 4
-    @FXML private Label box30 = new Label();
-    @FXML private Label box31 = new Label();
-    @FXML private Label box32 = new Label();
-    @FXML private Label box33 = new Label();
-    @FXML private Label box34 = new Label();
+    @FXML private Label box30;
+    @FXML private Label box31;
+    @FXML private Label box32;
+    @FXML private Label box33;
+    @FXML private Label box34;
 
     // Row 5
-    @FXML private Label box40 = new Label();
-    @FXML private Label box41 = new Label();
-    @FXML private Label box42 = new Label();
-    @FXML private Label box43 = new Label();
-    @FXML private Label box44 = new Label();
+    @FXML private Label box40;
+    @FXML private Label box41;
+    @FXML private Label box42;
+    @FXML private Label box43;
+    @FXML private Label box44;
 
     // Row 6
-    @FXML private Label box50 = new Label();
-    @FXML private Label box51 = new Label();
-    @FXML private Label box52 = new Label();
-    @FXML private Label box53 = new Label();
-    @FXML private Label box54 = new Label();
+    @FXML private Label box50;
+    @FXML private Label box51;
+    @FXML private Label box52;
+    @FXML private Label box53;
+    @FXML private Label box54;
 
     // Buttons
     @FXML private Button enter;
-    @FXML private Button backspace;
     @FXML private Button a;
     @FXML private Button b;
     @FXML private Button c;
@@ -97,127 +89,77 @@ public class GameWindowController {
     @FXML private Button y;
     @FXML private Button z;
 
-    @FXML private HBox row1 = new HBox();
-    @FXML private HBox row2 = new HBox();
-    @FXML private HBox row3 = new HBox();
-
     private int rowIndex      = 0;
     private int letterIndex   = 0;
-    private int letterCounter = 0;
+    private Label[][] letters;
 
     /**
      * Creates an object of type GameWindowController.
      */
     public GameWindowController() {
-        this.wordle = new Wordle();
-        this.player = new Player();
-        this.word = new String[MAX_WORD_LENGTH];
+        String[] word = new String[MAX_WORD_LENGTH];
+    }
+
+    /**
+     * Creates a 2D array of Labels.
+     */
+    public void initializeLetterBoxes() {
+        letters = new Label[][] {
+                {box00, box01, box02, box03, box04},
+                {box10, box11, box12, box13, box14},
+                {box20, box21, box22, box23, box24},
+                {box30, box31, box32, box33, box34},
+                {box40, box41, box42, box43, box44},
+                {box50, box51, box52, box53, box54}};
     }
 
     /**
      * Initializes all buttons.
      */
-    public void initialize() {
-        a.setOnAction(event -> {
-        });
-
-        b.setOnAction(event -> {
-        });
-
-        c.setOnAction(event -> {
-        });
-
-        d.setOnAction(event -> {
-        });
-
-        e.setOnAction(event -> {
-        });
-
-        f.setOnAction(event -> {
-        });
-
-        g.setOnAction(event -> {
-        });
-
-        h.setOnAction(event -> {
-        });
-
-        i.setOnAction(event -> {
-        });
-
-        j.setOnAction(event -> {
-        });
-
-        k.setOnAction(event -> {
-        });
-
-        l.setOnAction(event -> {
-        });
-
-        m.setOnAction(event -> {
-        });
-
-        n.setOnAction(event -> {
-        });
-
-        o.setOnAction(event -> {
-        });
-
-        p.setOnAction(event -> {
-        });
-
-        q.setOnAction(event -> {
-        });
-
-        r.setOnAction(event -> {
-        });
-
-        s.setOnAction(event -> {
-        });
-
-        t.setOnAction(event -> {
-        });
-
-        u.setOnAction(event -> {
-        });
-
-        v.setOnAction(event -> {
-        });
-
-        w.setOnAction(event -> {
-        });
-
-        x.setOnAction(event -> {
-        });
-
-        y.setOnAction(event -> {
-        });
-
-        z.setOnAction(event -> {
-        });
-
-        enter.setOnAction(event -> {
-
-        });
-
-        backspace.setOnAction(event -> {
-
-        });
+    public void initializeLetters() {
+        a.setOnAction(event -> selectLetterLocation("A"));
+        b.setOnAction(event -> selectLetterLocation("B"));
+        c.setOnAction(event -> selectLetterLocation("C"));
+        d.setOnAction(event -> selectLetterLocation("D"));
+        e.setOnAction(event -> selectLetterLocation("E"));
+        f.setOnAction(event -> selectLetterLocation("F"));
+        g.setOnAction(event -> selectLetterLocation("G"));
+        h.setOnAction(event -> selectLetterLocation("H"));
+        i.setOnAction(event -> selectLetterLocation("I"));
+        j.setOnAction(event -> selectLetterLocation("J"));
+        k.setOnAction(event -> selectLetterLocation("K"));
+        l.setOnAction(event -> selectLetterLocation("L"));
+        m.setOnAction(event -> selectLetterLocation("M"));
+        n.setOnAction(event -> selectLetterLocation("N"));
+        o.setOnAction(event -> selectLetterLocation("O"));
+        p.setOnAction(event -> selectLetterLocation("P"));
+        q.setOnAction(event -> selectLetterLocation("Q"));
+        r.setOnAction(event -> selectLetterLocation("R"));
+        s.setOnAction(event -> selectLetterLocation("S"));
+        t.setOnAction(event -> selectLetterLocation("T"));
+        u.setOnAction(event -> selectLetterLocation("U"));
+        v.setOnAction(event -> selectLetterLocation("V"));
+        w.setOnAction(event -> selectLetterLocation("W"));
+        x.setOnAction(event -> selectLetterLocation("X"));
+        y.setOnAction(event -> selectLetterLocation("Y"));
+        z.setOnAction(event -> selectLetterLocation("Z"));
     }
 
+    /**
+     * Initializes the ENTER button.
+     */
+    public void initializeEnterButton() {
+        enter.setOnAction(event -> { });
+    }
 
-
-
-//    protected void letterKeyPushed(final String letter) {
-//        gameBoard[0].setText(letter);
-//        if (letterIndex < 5) {
-//        } else {
-//            rowIndex++;
-//            letterIndex = 0;
-//        }
-//    }
-//
-//    protected void enterKeyPushed() { }
-//
-//    protected void backspaceKeyPushed() { }
+    private void selectLetterLocation(final String letter) {
+        if (letterIndex < MAX_WORD_LENGTH) {
+            letters[rowIndex][letterIndex].setText(letter);
+        } else {
+            rowIndex++;
+            letterIndex = 0;
+            letters[rowIndex][letterIndex].setText(letter);
+        }
+        letterIndex++;
+    }
 }

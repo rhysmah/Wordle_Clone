@@ -34,7 +34,8 @@ public class GameWindow extends Application {
 
     stage.setScene(gameScene);
     stage.show();
-    controller.initialize();
+    controller.initializeLetterBoxes();
+    controller.initializeLetters();
     }
 }
 
