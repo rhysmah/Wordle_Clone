@@ -173,7 +173,6 @@ public class GameWindowController {
 
         letterIndex = 0;
         String[] gameWordLetters = wordle.getGameWord().split("");
-        String[] userWordLetters = userGuessLetters;
 
         // Compares all five letters of the user guess word against the game word.
         while (letterIndex < MAX_WORD_LENGTH) {
@@ -185,7 +184,7 @@ public class GameWindowController {
             if (letter.equals(gameWordLetters[letterIndex])) {
                 LetterPrinter.printLetter(gameBoardTiles[rowIndex][letterIndex], LetterPrinter.GREEN);
                 gameWordLetters[letterIndex] = "";
-                userWordLetters[letterIndex] = "";
+                userGuessLetters[letterIndex] = "";
                 wordle.updateWinCondition(letterIndex);
             /*
              * If a letter in the user word exists in the game word, but in a different place,
@@ -194,7 +193,7 @@ public class GameWindowController {
             } else if (Arrays.asList(gameWordLetters).contains(letter)) {
                 LetterPrinter.printLetter(gameBoardTiles[rowIndex][letterIndex], LetterPrinter.YELLOW);
                 gameWordLetters[Arrays.asList(gameWordLetters).indexOf(letter)] = "";
-                userWordLetters[letterIndex] = "";
+                userGuessLetters[letterIndex] = "";
             /*
              * If the user word contains letters not in the game word, then keep the square GREY.
              */
