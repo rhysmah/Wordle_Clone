@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 /**
@@ -28,11 +27,12 @@ public class MainMenuController {
     @FXML
     private void startGameButtonClick() throws IOException {
 
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(MainMenu.class.getResource("/game-window.fxml"));
-        Scene gameScene = new Scene(fxmlLoader.load(), WINDOW_WIDTH_IN_PIXELS, WINDOW_HEIGHT_IN_PIXELS);
+        Stage stage                     = new Stage();
+        FXMLLoader fxmlLoader           = new FXMLLoader(MainMenu.class.getResource("/game-window.fxml"));
+        Scene gameScene                 = new Scene(fxmlLoader.load(), WINDOW_WIDTH_IN_PIXELS, WINDOW_HEIGHT_IN_PIXELS);
         GameWindowController controller = fxmlLoader.getController();
 
+        // Sets up key presses from the keyboard.
         gameScene.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode().isLetterKey()) {
                 controller.letterKeyPushed(keyEvent.getText());
