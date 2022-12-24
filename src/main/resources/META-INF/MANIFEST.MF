@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Main-Class: com.example.wordle_clone.MainMenu
+Class-Path: fxgl-17.1.jar javafx-media-18.0.1-mac-aarch64.jar fxgl-entit
+ y-17.1.jar javafx-controls-18.0.1-mac-aarch64.jar javafx-fxml-18.0.1-ma
+ c-aarch64.jar javafx-fxml-18.0.1.jar storage-4.0.13.jar javafx-media-18
+ .0.1.jar javafx-base-18.0.1.jar javafx-base-18.0.1-mac-aarch64.jar kotl
+ in-stdlib-common-1.5.32.jar javafx-controls-18.0.1.jar annotations-13.0
+ .jar jackson-databind-2.12.1.jar kotlin-stdlib-1.5.32-modular.jar util-
+ 4.0.13.jar javafx-graphics-18.0.1-mac-aarch64.jar fxgl-io-17.1.jar jack
+ son-core-2.12.1.jar fxgl-core-17.1.jar fxgl-gameplay-17.1.jar audio-4.0
+ .13.jar lifecycle-4.0.13.jar jackson-annotations-2.12.1.jar fxgl-scene-
+ 17.1.jar javafx-graphics-18.0.1.jar
+
