@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.util.Arrays;
+
 /**
  * Controls the GameWindow class.
  * @author Mahannah
@@ -18,44 +20,38 @@ public class GameWindowController {
     private final String[] userGuessLetters;
 
     /*
-     * All the boxes where user guess letters appear.
+     * All the boxes, organized by row, where user guess letters appear.
      */
-    // Row 1
     @FXML private Label box00;
     @FXML private Label box01;
     @FXML private Label box02;
     @FXML private Label box03;
     @FXML private Label box04;
 
-    // Row 2
     @FXML private Label box10;
     @FXML private Label box11;
     @FXML private Label box12;
     @FXML private Label box13;
     @FXML private Label box14;
 
-    // Row 3
     @FXML private Label box20;
     @FXML private Label box21;
     @FXML private Label box22;
     @FXML private Label box23;
     @FXML private Label box24;
 
-    // Row 4
     @FXML private Label box30;
     @FXML private Label box31;
     @FXML private Label box32;
     @FXML private Label box33;
     @FXML private Label box34;
 
-    // Row 5
     @FXML private Label box40;
     @FXML private Label box41;
     @FXML private Label box42;
     @FXML private Label box43;
     @FXML private Label box44;
 
-    // Row 6
     @FXML private Label box50;
     @FXML private Label box51;
     @FXML private Label box52;
@@ -97,15 +93,18 @@ public class GameWindowController {
     private int rowIndex    = 0;
     private int letterIndex = 0;
 
-    private Label[][] letters;
+    private Label[][] gameBoardTiles;
+
+    // TODO -- create animation for letters.
 
     /**
      * Creates an object of type GameWindowController.
      */
     public GameWindowController() {
+        wordle           = new Wordle();
+        player           = new Player();
         userGuessLetters = new String[MAX_WORD_LENGTH];
-        wordle    = new Wordle();
-        player    = new Player();
+
         System.out.println(wordle.getGameWord());
     }
 
@@ -113,7 +112,7 @@ public class GameWindowController {
      * Creates a 2D array of Labels.
      */
     public void initializeLetterBoxes() {
-        letters = new Label[][] {
+        gameBoardTiles = new Label[][] {
                 {box00, box01, box02, box03, box04},
                 {box10, box11, box12, box13, box14},
                 {box20, box21, box22, box23, box24},
@@ -126,8 +125,8 @@ public class GameWindowController {
      * Initializes all buttons.
      */
     public void initializeButtons() {
-        backspace.setOnAction(event -> backspaceButtonClicked());
-        enter.setOnAction(event -> enterButtonClicked());
+        backspace.setOnAction(event -> backspaceButtonPushed());
+        enter.setOnAction(event -> enterButtonPushed());
         a.setOnAction(event -> selectLetterLocation("A"));
         b.setOnAction(event -> selectLetterLocation("B"));
         c.setOnAction(event -> selectLetterLocation("C"));
@@ -161,19 +160,9 @@ public class GameWindowController {
      */
     private void selectLetterLocation(final String letter) {
         if (letterIndex < MAX_WORD_LENGTH) {
-            letters[rowIndex][letterIndex].setText(letter);
+            gameBoardTiles[rowIndex][letterIndex].setText(letter);
             userGuessLetters[letterIndex] = letter;
             letterIndex++;
-        }
-    }
-
-    /*
-     * Removes letters sequentially from each Label.
-     */
-    private void backspaceButtonClicked() {
-        if (letterIndex > 0) {
-            letterIndex--;
-            letters[rowIndex][letterIndex].setText("");
         }
     }
 
@@ -182,67 +171,105 @@ public class GameWindowController {
      */
     private void printOutUserLetters() {
 
-        letterIndex = 0; // Sets the index to 0, so the evaluation starts at beginning of word.
+        letterIndex = 0;
         String[] gameWordLetters = wordle.getGameWord().split("");
+        String[] userWordLetters = userGuessLetters;
 
         // Compares all five letters of the user guess word against the game word.
         while (letterIndex < MAX_WORD_LENGTH) {
-            /*
-             * If the position of a letter in a user word is the exact same as the position
+            String letter = userGuessLetters[letterIndex];
+
+            /* If the position of a letter in a user word is the exact same as the position
              * of a letter in the game word, make the square GREEN.
              */
-            if (userGuessLetters[letterIndex].equals(gameWordLetters[letterIndex])) {
-                LetterPrinter.printLetter(letters[rowIndex][letterIndex], LetterPrinter.GREEN);
+            if (letter.equals(gameWordLetters[letterIndex])) {
+                LetterPrinter.printLetter(gameBoardTiles[rowIndex][letterIndex], LetterPrinter.GREEN);
+                gameWordLetters[letterIndex] = "";
+                userWordLetters[letterIndex] = "";
                 wordle.updateWinCondition(letterIndex);
             /*
              * If a letter in the user word exists in the game word, but in a different place,
              * then make the square YELLOW.
              */
-            } else if (!wordle.getGameWord().contains(userGuessLetters[letterIndex])) {
-                LetterPrinter.printLetter(letters[rowIndex][letterIndex], LetterPrinter.GREY);
+            } else if (Arrays.asList(gameWordLetters).contains(letter)) {
+                LetterPrinter.printLetter(gameBoardTiles[rowIndex][letterIndex], LetterPrinter.YELLOW);
+                gameWordLetters[Arrays.asList(gameWordLetters).indexOf(letter)] = "";
+                userWordLetters[letterIndex] = "";
             /*
              * If the user word contains letters not in the game word, then keep the square GREY.
              */
             } else {
-                LetterPrinter.printLetter(letters[rowIndex][letterIndex], LetterPrinter.YELLOW);
+                LetterPrinter.printLetter(gameBoardTiles[rowIndex][letterIndex], LetterPrinter.GREY);
             }
             letterIndex++;
         }
     }
 
+    /*
+     * Comment needed.
+     */
     private void checkIfWinConditionMet() {
         if (wordle.winConditionMet()) {
+            // Pop up if user meets win condition.
             System.out.println("Congratulations! You guessed the word.");
-
         } else {
             wordle.resetWinCondition();
         }
     }
 
-    private void checkIfPlayerTurnsRemaining() {
+    /**
+     * Info needed.
+     * @param letter the value of the letter key pushed.
+     */
+    protected void letterKeyPushed(final String letter) {
+        selectLetterLocation(letter.toUpperCase());
+    }
+
+    /*
+     * Comment needed.
+     */
+    private void checkIfPlayerHasTurnsRemaining() {
         if (player.getPlayerTurn() == Player.MAX_NUMBER_PLAYER_TURNS) {
+            // Pop up that tells player they've lost.
             System.out.println("You lost! The word was " + wordle.getGameWord());
         }
     }
 
-    /*
+    /**
+     * Removes letters sequentially from each Label.
+     */
+    protected void backspaceButtonPushed() {
+        if (letterIndex > 0) {
+            letterIndex--;
+            gameBoardTiles[rowIndex][letterIndex].setText("");
+        }
+    }
+
+    /**
      * Info needed.
      */
-    private void enterButtonClicked() {
+    protected void enterButtonPushed() {
 
-        String userGuessWord = String.join("", userGuessLetters);
+        // Player cannot do anything until they've entered a five-letter word.
+        if (letterIndex == MAX_WORD_LENGTH) {
 
-        if (wordle.validateUserGuess(userGuessWord)) {
-            letterIndex = 0;
+            // Concatenate letters into single user word String.
+            String userGuessWord = String.join("", userGuessLetters);
 
-            player.incrementPlayerTurn();
-            printOutUserLetters();
+            // Check if the user guess is valid.
+            if (wordle.validateUserGuess(userGuessWord)) {
 
-            checkIfWinConditionMet();
-            checkIfPlayerTurnsRemaining();
+                player.incrementPlayerTurn();     // If a valid word, then increment turn.
 
-            rowIndex++;
-            letterIndex = 0;
+                letterIndex = 0;                  // Start at the beginning of the user word.
+                printOutUserLetters();            // Prints color-coded letters.
+                checkIfWinConditionMet();         // Game ends if player correctly guesses word.
+                checkIfPlayerHasTurnsRemaining(); // Game ends if player runs out of turns.
+
+                // Move to the beginning of the next row.
+                rowIndex++;
+                letterIndex = 0;
+            }
         }
     }
 }
