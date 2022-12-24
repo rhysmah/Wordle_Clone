@@ -76,6 +76,13 @@ public class Wordle {
     }
 
     /**
+     * Sets all values in the winCondition array to false.
+     */
+    public void resetWinCondition() {
+        Arrays.fill(winCondition, false);
+    }
+
+    /**
      * Returns the win condition (a Boolean array).
      * @return a Boolean array.
      */

@@ -13,12 +13,12 @@ public class GameWindowController {
 
     private static final int MAX_WORD_LENGTH = 5;
 
-    private final Wordle wordle;
-    private final String[] userGuess;
+    private final Wordle   wordle;
+    private final Player   player;
+    private final String[] userGuessLetters;
 
     /*
-     * As per Wordle game rules, there are six rows, with five letters per row, for a
-     * total of 30 letters. Each Label, below, represents one of the those letters.
+     * All the boxes where user guess letters appear.
      */
     // Row 1
     @FXML private Label box00;
@@ -62,7 +62,9 @@ public class GameWindowController {
     @FXML private Label box53;
     @FXML private Label box54;
 
-    // Buttons
+    /*
+     * All the buttons available to the player.
+     */
     @FXML private Button backspace;
     @FXML private Button enter;
     @FXML private Button a;
@@ -101,8 +103,10 @@ public class GameWindowController {
      * Creates an object of type GameWindowController.
      */
     public GameWindowController() {
-        userGuess = new String[MAX_WORD_LENGTH];
-        wordle = new Wordle();
+        userGuessLetters = new String[MAX_WORD_LENGTH];
+        wordle    = new Wordle();
+        player    = new Player();
+        System.out.println(wordle.getGameWord());
     }
 
     /**
@@ -158,37 +162,87 @@ public class GameWindowController {
     private void selectLetterLocation(final String letter) {
         if (letterIndex < MAX_WORD_LENGTH) {
             letters[rowIndex][letterIndex].setText(letter);
-            userGuess[letterIndex] = letter;
+            userGuessLetters[letterIndex] = letter;
             letterIndex++;
         }
     }
 
-    private void enterButtonClicked() {
-        System.out.println(wordle.getGameWord());
-        letterIndex = 0;
-        String word = String.join("", userGuess);
-        if (!wordle.validateUserGuess(word)) {
-            System.out.println("NOT A WORD!");
-        } else {
-            letterIndex = 0;
-            while (letterIndex < MAX_WORD_LENGTH) {
-                String[] gameWordArray = wordle.getGameWord().split("");
-                if (userGuess[letterIndex].equals(gameWordArray[letterIndex])) {
-                    LetterPrinter.printLetter(letters[rowIndex][letterIndex], LetterPrinter.GREEN);
-                } else if (!wordle.getGameWord().contains(userGuess[letterIndex])) {
-                    LetterPrinter.printLetter(letters[rowIndex][letterIndex], LetterPrinter.GREY);
-                } else {
-                    LetterPrinter.printLetter(letters[rowIndex][letterIndex], LetterPrinter.YELLOW);
-                }
-                letterIndex++;
-            }
-        }
-    }
-
+    /*
+     * Removes letters sequentially from each Label.
+     */
     private void backspaceButtonClicked() {
         if (letterIndex > 0) {
             letterIndex--;
             letters[rowIndex][letterIndex].setText("");
+        }
+    }
+
+    /*
+     * Print out user letters.
+     */
+    private void printOutUserLetters() {
+
+        letterIndex = 0; // Sets the index to 0, so the evaluation starts at beginning of word.
+        String[] gameWordLetters = wordle.getGameWord().split("");
+
+        // Compares all five letters of the user guess word against the game word.
+        while (letterIndex < MAX_WORD_LENGTH) {
+            /*
+             * If the position of a letter in a user word is the exact same as the position
+             * of a letter in the game word, make the square GREEN.
+             */
+            if (userGuessLetters[letterIndex].equals(gameWordLetters[letterIndex])) {
+                LetterPrinter.printLetter(letters[rowIndex][letterIndex], LetterPrinter.GREEN);
+                wordle.updateWinCondition(letterIndex);
+            /*
+             * If a letter in the user word exists in the game word, but in a different place,
+             * then make the square YELLOW.
+             */
+            } else if (!wordle.getGameWord().contains(userGuessLetters[letterIndex])) {
+                LetterPrinter.printLetter(letters[rowIndex][letterIndex], LetterPrinter.GREY);
+            /*
+             * If the user word contains letters not in the game word, then keep the square GREY.
+             */
+            } else {
+                LetterPrinter.printLetter(letters[rowIndex][letterIndex], LetterPrinter.YELLOW);
+            }
+            letterIndex++;
+        }
+    }
+
+    private void checkIfWinConditionMet() {
+        if (wordle.winConditionMet()) {
+            System.out.println("Congratulations! You guessed the word.");
+
+        } else {
+            wordle.resetWinCondition();
+        }
+    }
+
+    private void checkIfPlayerTurnsRemaining() {
+        if (player.getPlayerTurn() == Player.MAX_NUMBER_PLAYER_TURNS) {
+            System.out.println("You lost! The word was " + wordle.getGameWord());
+        }
+    }
+
+    /*
+     * Info needed.
+     */
+    private void enterButtonClicked() {
+
+        String userGuessWord = String.join("", userGuessLetters);
+
+        if (wordle.validateUserGuess(userGuessWord)) {
+            letterIndex = 0;
+
+            player.incrementPlayerTurn();
+            printOutUserLetters();
+
+            checkIfWinConditionMet();
+            checkIfPlayerTurnsRemaining();
+
+            rowIndex++;
+            letterIndex = 0;
         }
     }
 }
